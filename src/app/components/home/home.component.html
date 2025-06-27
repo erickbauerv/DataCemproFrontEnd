@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Lista de Produtos</h2>
 
-  <div *ngIf="authService.getToken()">
+  <div *ngIf="authService.isAdminUser()">
     <h2>Adicionar Produto</h2>
     <input [(ngModel)]="novoProduto.nome" placeholder="Nome">
     <input [(ngModel)]="novoProduto.valor" type="number" placeholder="Valor">
@@ -14,14 +14,14 @@
       <tr>
         <th>Nome</th>
         <th>Valor</th>
-        <th *ngIf="authService.getToken()">Ações</th>
+        <th *ngIf="authService.isAdminUser()">Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let produto of produtos">
         <td>{{ produto.nome || 'Não informado' }}</td>
         <td>{{ produto.valor }}</td>
-        <td *ngIf="authService.getToken()">
+        <td *ngIf="authService.isAdminUser()">
           <button (click)="deletarProduto(produto.id)" class="btn-excluir">
             Excluir
           </button>

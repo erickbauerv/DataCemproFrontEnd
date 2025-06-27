@@ -17,4 +17,21 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+  getUserRole(): string {
+    const token = this.getToken();
+    if (!token) return 'User';
+    
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload?.roles || 'User';
+    } catch (e) {
+      console.error('Erro ao decodificar token:', e);
+      return 'User';
+    }
+  }
+
+  isAdminUser(): boolean {
+    return this.getUserRole() == 'Admin';
+  }
 }
