@@ -1,1 +1,18 @@
-<p>home works!</p>
+<div class="container">
+  <h2>Lista de Produtos</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produto of produtos">
+        <td>{{ produto.nome || 'Não informado' }}</td>
+        <td>{{ produto.valor }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
