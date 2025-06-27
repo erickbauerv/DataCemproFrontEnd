@@ -1,18 +1,36 @@
 <div class="container">
   <h2>Lista de Produtos</h2>
 
+  <div *ngIf="authService.getToken()">
+    <h2>Adicionar Produto</h2>
+    <input [(ngModel)]="novoProduto.nome" placeholder="Nome">
+    <input [(ngModel)]="novoProduto.valor" type="number" placeholder="Valor">
+    <button (click)="adicionarProduto()">Salvar</button>
+    <p *ngIf="erro">{{ erro }}</p>
+  </div>
+
   <table>
     <thead>
       <tr>
         <th>Nome</th>
         <th>Valor</th>
+        <th *ngIf="authService.getToken()">Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let produto of produtos">
         <td>{{ produto.nome || 'Não informado' }}</td>
         <td>{{ produto.valor }}</td>
+        <td *ngIf="authService.getToken()">
+          <button (click)="deletarProduto(produto.id)" class="btn-excluir">
+            Excluir
+          </button>
+      </td>
       </tr>
     </tbody>
   </table>
+
+  <div *ngIf="erro" class="error-message">
+    {{ erro }}
+  </div>
 </div>

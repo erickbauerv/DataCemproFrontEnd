@@ -13,4 +13,8 @@ export class AuthService {
   login(Usuario: string, Senha: string) {
     return this.http.post<any>(`${this.apiUrl}/login`, { Usuario: Usuario, Senha: Senha });
   }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 }
